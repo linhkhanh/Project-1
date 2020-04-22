@@ -1,0 +1,57 @@
+body {
+    text-align: center;
+}
+.container {
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid black;
+    justify-content: center;
+    align-content: center;
+}
+.square {
+    width: 33%;;
+    height: 33%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* clear Menu  */
+.result {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.left {
+   display: flex;
+   flex-flow: row nowrap;
+   width: 200px;
+   justify-content: space-between;
+}
+
+.left > p {
+    width: 35%;
+    border: 1px solid black;
+}
+
+/* level */
+.row {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.item {
+    width: 20%;
+    height: 100%;
+    border: 1px solid black;
+    cursor: pointer;
+}
