@@ -54,4 +54,5 @@ body {
     height: 100%;
     border: 1px solid black;
     cursor: pointer;
+    background-size: cover;
 }

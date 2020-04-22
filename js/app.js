@@ -1,16 +1,28 @@
 /// variable
 const menu = ['house', 'animal', 'plant', 'people', 'machine', 'transport', 'clothes', 'landcape', 'cartoon'];
-const imgArr = ['https://image.shutterstock.com/image-vector/cartoon-white-brick-wall-texture-260nw-1379193254.jpg'];
+const wall = 'https://image.shutterstock.com/image-vector/cartoon-white-brick-wall-texture-260nw-1379193254.jpg';
 const house = ['https://i.pinimg.com/originals/34/30/2d/34302d7a184289404e2dff1f55ade1a5.jpg',
-'https://cdn2.vectorstock.com/i/1000x1000/83/06/funny-house-cartoon-vector-618306.jpg',
-'https://www.nicepng.com/png/detail/238-2384015_house-cartoon-drawing-cottage-house-cartoon-png.png',
-'https://en.pimg.jp/036/927/788/1/36927788.jpg',
-'https://www.pngitem.com/pimgs/m/3-32178_house-cartoon-log-cabin-cartoon-house-transparent-background.png',
-'https://en.pimg.jp/036/927/788/1/36927788.jpg',
-'https://p7.hiclipart.com/preview/723/859/673/house-royalty-free-cartoon-house.jpg',
-'https://www.pngkey.com/png/detail/61-619052_house-cartoon-png-cartoon-house-transparent-png.png',
+    'https://cdn2.vectorstock.com/i/1000x1000/83/06/funny-house-cartoon-vector-618306.jpg',
+    'https://www.nicepng.com/png/detail/238-2384015_house-cartoon-drawing-cottage-house-cartoon-png.png',
+    'https://i7.pngguru.com/preview/1009/80/1010/house-cartoon-building-yard.jpg',
+    'https://www.pngitem.com/pimgs/m/3-32178_house-cartoon-log-cabin-cartoon-house-transparent-background.png',
+    'https://en.pimg.jp/036/927/788/1/36927788.jpg',
+    'https://p7.hiclipart.com/preview/723/859/673/house-royalty-free-cartoon-house.jpg',
+    'https://www.pngkey.com/png/detail/61-619052_house-cartoon-png-cartoon-house-transparent-png.png',
 ];
 
+/////function create array
+
+const createArr = (arr, items) => {
+    
+}
+const houseLv1 = [house[0], house[1], house[0], house[1]];
+const houseLv2 = [house[0], house[1], house[2], house[0], house[1], house[2]];
+const houseLv3 = [house[0], house[1], house[2], house[3], house[0], house[1], house[2], house[3]];
+const houseLv4 = [house[0], house[1], house[2], house[3], house[4], house[0], house[1], house[2], house[3], house[4]];
+const houseLv5 = [house[0], house[1], house[2], house[3], house[4], house[5], house[0], house[1], house[2], house[3], house[4], house[5]];
+const houseLv6 = [house[0], house[1], house[2], house[3], house[4], house[5], house[6], house[0], house[1], house[2], house[3], house[4], house[5], house[6]];
+const houseLv7 = [house[0], house[1], house[2], house[3], house[4], house[5], house[6], house[7], house[0], house[1], house[2], house[3], house[4], house[5], house[6], house[7]];
 /////// function
 const createMenu = () => {
     const $container = $('<div>').addClass('container');
@@ -21,7 +33,7 @@ const createMenu = () => {
             .append($('<p>').html(menu[i]));
         $('.container').append($div);
     }
-    $('.square').on('click', craeteLevel1);
+    $('.square').on('click', createLevel1);
 }
 
 const clearMenu = (level) => {
@@ -60,18 +72,37 @@ const addItem = (row, num) => {
     for (let i = 0; i < row; i++) {
         const $div = $('<div>').addClass('row');
         for (let j = 0; j < num; j++) {
-            $div.append($('<img>')
-                .addClass('item')
-                .attr('src', 'https://image.shutterstock.com/image-vector/cartoon-white-brick-wall-texture-260nw-1379193254.jpg'));
+            $div.append($('<div>')
+                .addClass('item'))
         }
         $('.container').append($div);
     }
 }
+
+const setBackgroundOfItem = (arr) => {
+    const $item = $('.item');
+    for (let i = 0; i < $item.length; i++) {
+        $item.eq(i).css('background-image', `url(${arr[i]})`)
+    }
+}
+
+const turnOverImg = () => {
+    setTimeout(() => {
+        $('.item').css('background-image', `url(${wall})`)
+    }, 3000)
+}
 //////////////////eventhandler
-const craeteLevel1 = () => {
+const createLevel1 = () => {
     clearMenu('Level 1');
     addItem(2, 2);
-    $('.next').on('click', createLevel2)
+    setBackgroundOfItem(houseLv1);
+    turnOverImg();
+    $('.next').on('click', createLevel2);
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv1);
+        turnOverImg();
+    });
 }
 
 const backToMenu = () => {
@@ -82,7 +113,14 @@ const backToMenu = () => {
 const createLevel2 = () => {
     clearMenu('Level 2');
     addItem(2, 3);
+    setBackgroundOfItem(houseLv2);
+    turnOverImg();
     $('.next').on('click', createLevel3);
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv2);
+        turnOverImg();
+    });
 }
 
 
@@ -90,33 +128,71 @@ const createLevel3 = () => {
     clearMenu('Level 3');
     addItem(2, 3);
     addItem(1, 2);
+    setBackgroundOfItem(houseLv3);
+    turnOverImg();
     $('.next').on('click', createLevel4);
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv3);
+        turnOverImg();
+    });
 }
 
 const createLevel4 = () => {
     clearMenu('Level 4');
     addItem(3, 3);
     addItem(1, 1);
+    setBackgroundOfItem(houseLv4);
+    turnOverImg();
     $('.next').on('click', createLevel5);
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv4);
+        turnOverImg();
+    });
 }
 
 const createLevel5 = () => {
     clearMenu('Level 5');
     addItem(4, 3);
+    setBackgroundOfItem(houseLv5);
+    turnOverImg();
     $('.next').on('click', createLevel6);
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv5);
+        turnOverImg();
+    });
 }
 
 const createLevel6 = () => {
     clearMenu('Level 6');
     addItem(3, 4);
     addItem(1, 2);
+    setBackgroundOfItem(houseLv6);
+    turnOverImg();
     $('.next').on('click', createLevel7);
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv6);
+        turnOverImg();
+    });
 }
 
 const createLevel7 = () => {
     clearMenu('Level 7');
     addItem(4, 4);
+    setBackgroundOfItem(houseLv7);
+    turnOverImg();
+
+    $('.again').on('click', () => {
+        setBackgroundOfItem(houseLv7);
+        turnOverImg();
+    });
 }
+
+//img///
+
 ////////////////////////
 $(() => {
     createMenu();
