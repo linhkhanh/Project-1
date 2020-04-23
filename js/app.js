@@ -14,16 +14,24 @@ const house = ['https://i.pinimg.com/originals/34/30/2d/34302d7a184289404e2dff1f
 /////function create array
 
 const createArr = (arr, items) => {
-    
+    const subArr = [];
+    for(let i = 0; i < 2; i++) {
+        for(let j = 0; j < items/2; j++) {
+            subArr.push(arr[j]);
+        }
+    }
+    return subArr;
 }
-const houseLv1 = [house[0], house[1], house[0], house[1]];
-const houseLv2 = [house[0], house[1], house[2], house[0], house[1], house[2]];
-const houseLv3 = [house[0], house[1], house[2], house[3], house[0], house[1], house[2], house[3]];
-const houseLv4 = [house[0], house[1], house[2], house[3], house[4], house[0], house[1], house[2], house[3], house[4]];
-const houseLv5 = [house[0], house[1], house[2], house[3], house[4], house[5], house[0], house[1], house[2], house[3], house[4], house[5]];
-const houseLv6 = [house[0], house[1], house[2], house[3], house[4], house[5], house[6], house[0], house[1], house[2], house[3], house[4], house[5], house[6]];
-const houseLv7 = [house[0], house[1], house[2], house[3], house[4], house[5], house[6], house[7], house[0], house[1], house[2], house[3], house[4], house[5], house[6], house[7]];
-/////// function
+const houseLv1 = createArr(house, 4);
+const houseLv2 = createArr(house, 6);
+const houseLv3 = createArr(house, 8);
+const houseLv4 = createArr(house, 10);
+const houseLv5 = createArr(house, 12);
+const houseLv6 = createArr(house, 14);
+const houseLv7 = createArr(house, 16);
+
+/////// function logic 
+
 const createMenu = () => {
     const $container = $('<div>').addClass('container');
     $('.body-game').append($container);
@@ -82,7 +90,9 @@ const addItem = (row, num) => {
 const setBackgroundOfItem = (arr) => {
     const $item = $('.item');
     for (let i = 0; i < $item.length; i++) {
-        $item.eq(i).css('background-image', `url(${arr[i]})`)
+        $item.eq(i)
+        .css('background-image', `url(${arr[i]})`)
+        .attr('id', i)
     }
 }
 
@@ -91,12 +101,36 @@ const turnOverImg = () => {
         $('.item').css('background-image', `url(${wall})`)
     }, 3000)
 }
+
+const displayFaceUp = (event) => {
+    const $target = $(event.currentTarget);
+    let index = $target.attr('id');
+    let h2 = $('h2').html();
+
+    if (h2 === 'Level 1') {
+        $target.css('background-image', `url(${houseLv1[index]})`);
+    } else if (h2 === 'Level 2') {
+        $target.css('background-image', `url(${houseLv2[index]})`);
+    } else if (h2 === 'Level 3') {
+        $target.css('background-image', `url(${houseLv3[index]})`);
+    } else if (h2 === 'Level 4') {
+        $target.css('background-image', `url(${houseLv4[index]})`);
+    } else if (h2 === 'Level 5') {
+        $target.css('background-image', `url(${houseLv5[index]})`);
+    } else if (h2 === 'Level 6') {
+        $target.css('background-image', `url(${houseLv6[index]})`);
+    } else {
+        $target.css('background-image', `url(${houseLv7[index]})`);
+    }  
+}
 //////////////////eventhandler
 const createLevel1 = () => {
     clearMenu('Level 1');
     addItem(2, 2);
     setBackgroundOfItem(houseLv1);
     turnOverImg();
+
+    $('.item').on('click', displayFaceUp);
     $('.next').on('click', createLevel2);
 
     $('.again').on('click', () => {
@@ -115,6 +149,8 @@ const createLevel2 = () => {
     addItem(2, 3);
     setBackgroundOfItem(houseLv2);
     turnOverImg();
+
+    $('.item').on('click', displayFaceUp);
     $('.next').on('click', createLevel3);
 
     $('.again').on('click', () => {
@@ -130,6 +166,8 @@ const createLevel3 = () => {
     addItem(1, 2);
     setBackgroundOfItem(houseLv3);
     turnOverImg();
+
+    $('.item').on('click', displayFaceUp);
     $('.next').on('click', createLevel4);
 
     $('.again').on('click', () => {
@@ -144,6 +182,8 @@ const createLevel4 = () => {
     addItem(1, 1);
     setBackgroundOfItem(houseLv4);
     turnOverImg();
+
+    $('.item').on('click', displayFaceUp);
     $('.next').on('click', createLevel5);
 
     $('.again').on('click', () => {
@@ -157,6 +197,8 @@ const createLevel5 = () => {
     addItem(4, 3);
     setBackgroundOfItem(houseLv5);
     turnOverImg();
+
+    $('.item').on('click', displayFaceUp);
     $('.next').on('click', createLevel6);
 
     $('.again').on('click', () => {
@@ -171,6 +213,8 @@ const createLevel6 = () => {
     addItem(1, 2);
     setBackgroundOfItem(houseLv6);
     turnOverImg();
+
+    $('.item').on('click', displayFaceUp);
     $('.next').on('click', createLevel7);
 
     $('.again').on('click', () => {
@@ -185,6 +229,7 @@ const createLevel7 = () => {
     setBackgroundOfItem(houseLv7);
     turnOverImg();
 
+    $('.item').on('click', displayFaceUp);
     $('.again').on('click', () => {
         setBackgroundOfItem(houseLv7);
         turnOverImg();
