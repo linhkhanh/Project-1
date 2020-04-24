@@ -10,7 +10,7 @@ const house = ['https://i.pinimg.com/originals/34/30/2d/34302d7a184289404e2dff1f
     'https://p7.hiclipart.com/preview/723/859/673/house-royalty-free-cartoon-house.jpg',
     'https://www.pngkey.com/png/detail/61-619052_house-cartoon-png-cartoon-house-transparent-png.png',
 ];
-
+let twoImages = [];
 
 /////// function logic 
 const App = {
@@ -24,6 +24,7 @@ const App = {
         return subArr;
     },
     createLevel: (level, row1, item1, row2, item2, arr, nextLevel) => {
+        let clickAgain = 0;
         UI.clearMenu(level);
         UI.addItem(row1, item1);
         UI.addItem(row2, item2);
@@ -32,11 +33,32 @@ const App = {
 
         $('.item').on('click', EventHandler.onLCickDisplayFaceUp);
         $('.again').on('click', () => {
-            EventHandler.onClickSeeImagesAgain(arr);
+            while (clickAgain < 1) {
+                EventHandler.onClickSeeImagesAgain(arr);
+                clickAgain++;
+            }
         });
         $('.next').on('click', () => {
-            EventHandler.onClickGoToNextLevel(nextLevel)
+            EventHandler.onClickGoToNextLevel(nextLevel);
         })
+        $('.retry').on('click', () => {
+            EventHandler.onClickSeeImagesAgain(arr);
+        })
+    },
+    compareTwoImages: (srcImg, index) => {
+        if (twoImages.length < 2) {
+            twoImages.push({ src: srcImg, id: index });
+        }
+        if (twoImages.length === 2) {
+            if (twoImages[0].src === twoImages[1].src) {
+                $(`#${twoImages[0].id}`).css('opacity', '0.1');
+                $(`#${twoImages[1].id}`).css('opacity', '0.1');
+            } else {
+                $(`#${twoImages[0].id}`).css('background-image', `url(${wall})`);
+                $(`#${twoImages[1].id}`).css('background-image', `url(${wall})`);
+            }
+            twoImages = [];
+        }
     }
 }
 //////////////UI
@@ -63,7 +85,9 @@ const UI = {
         const $div = $('<div>').addClass('result')
         const $left = $('<div>').addClass('left');
         const $right = $('<div>').addClass('right');
-        $div.append($left, $right);
+        const $center = $('<div>').addClass('center');
+        const $stars = $('<p>').addClass('star');
+        $div.append($left, $center, $right);
         $left.append($('<button>')
             .html('home')
             .addClass('home'),
@@ -74,6 +98,7 @@ const UI = {
                 .addClass('quantity')
                 .html('?')
         );
+        $center.append($stars);
         $right.append($('<button>')
             .html('Next')
             .addClass('next'),
@@ -96,8 +121,9 @@ const UI = {
         const $item = $('.item');
         for (let i = 0; i < $item.length; i++) {
             $item.eq(i)
+                .removeAttr('style')
                 .css('background-image', `url(${arr[i]})`)
-                .attr('id', i)
+                .attr('id', i);
         }
     },
     turnOverImg: () => {
@@ -123,34 +149,37 @@ const EventHandler = {
         const $target = $(event.currentTarget);
         let index = $target.attr('id');
         let h2 = $('h2').html();
+        let srcImg = '';
 
         if (h2 === 'Level 1') {
-            $target.css('background-image', `url(${level1.arr[index]})`);
+            srcImg = level1.arr[index];
         } else if (h2 === 'Level 2') {
-            $target.css('background-image', `url(${level2.arr[index]})`);
+            srcImg = level2.arr[index];
         } else if (h2 === 'Level 3') {
-            $target.css('background-image', `url(${level3.arr[index]})`);
+            srcImg = level3.arr[index];
         } else if (h2 === 'Level 4') {
-            $target.css('background-image', `url(${level4.arr[index]})`);
+            srcImg = level4.arr[index];
         } else if (h2 === 'Level 5') {
-            $target.css('background-image', `url(${level5.arr[index]})`);
+            srcImg = level5.arr[index];
         } else if (h2 === 'Level 6') {
-            $target.css('background-image', `url(${level6.arr[index]})`);
+            srcImg = level6.arr[index];
         } else {
-            $target.css('background-image', `url(${level7.arr[index]})`);
+            srcImg = level7.arr[index];
         }
+        $target.css('background-image', `url(${srcImg})`);
+        App.compareTwoImages(srcImg, index);
     }
 }
 ///////////////////////
 class Level {
     constructor(arr, level) {
         this.arr = arr,
-        this.level = level
+            this.level = level
     }
 }
 let level1 = new Level(App.createArr(house, 4), () => {
     App.createLevel('Level 1', 2, 2, 0, 0, App.createArr(house, 4), level2.level);
-} );
+});
 let level2 = new Level(App.createArr(house, 6), () => {
     App.createLevel('Level 2', 2, 3, 0, 0, App.createArr(house, 6), level3.level)
 });
