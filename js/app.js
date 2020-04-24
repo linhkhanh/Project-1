@@ -25,13 +25,18 @@ const App = {
     },
     createLevel: (level, row1, item1, row2, item2, arr, nextLevel) => {
         let clickAgain = 0;
+        let click = 0;
         UI.clearMenu(level);
         UI.addItem(row1, item1);
         UI.addItem(row2, item2);
         UI.setBackgroundOfItem(arr);
         UI.turnOverImg();
 
-        $('.item').on('click', EventHandler.onLCickDisplayFaceUp);
+        $('.item').on('click', () => {
+            EventHandler.onLCickDisplayFaceUp(event);
+            click++;
+            $('.quantity').html(`?${click}`);
+        });
         $('.again').on('click', () => {
             while (clickAgain < 1) {
                 EventHandler.onClickSeeImagesAgain(arr);
@@ -40,9 +45,9 @@ const App = {
         });
         $('.next').on('click', () => {
             EventHandler.onClickGoToNextLevel(nextLevel);
-        })
+        });
         $('.retry').on('click', () => {
-            EventHandler.onClickSeeImagesAgain(arr);
+            EventHandler.onClickRetry(arr);
         })
     },
     compareTwoImages: (srcImg, index) => {
@@ -64,11 +69,10 @@ const App = {
     completeLevel: () => {
         const items = $('.item');
         let result = true;
-        for(let i = 0; i < items.length; i++) {
+        for (let i = 0; i < items.length; i++) {
             result = result && App.isOpacity(items.eq(i));
         }
-        if(result) $('.star').html('Complete Level');
-
+        if (result) $('.star').html('Complete Level');
     },
     isOpacity: (item) => {
         return item.css('opacity') === '0.1';
@@ -157,14 +161,13 @@ const EventHandler = {
         UI.turnOverImg();
     },
     onClickGoToNextLevel: (nextLevel) => {
-        nextLevel()
+        if ($('.star').html()) nextLevel();
     },
     onLCickDisplayFaceUp: (event) => {
         const $target = $(event.currentTarget);
         let index = $target.attr('id');
         let h2 = $('h2').html();
         let srcImg = '';
-
         if (h2 === 'Level 1') {
             srcImg = level1.arr[index];
         } else if (h2 === 'Level 2') {
@@ -182,6 +185,12 @@ const EventHandler = {
         }
         $target.css('background-image', `url(${srcImg})`);
         App.compareTwoImages(srcImg, index);
+    },
+    onClickRetry: (arr) => {
+        if ($('.star').html()) {
+            EventHandler.onClickSeeImagesAgain(arr);
+            $('.star').html('');
+        }
     }
 }
 ///////////////////////
