@@ -33,7 +33,7 @@ const App = {
         UI.turnOverImg();
 
         $('.item').on('click', () => {
-            EventHandler.onLCickDisplayFaceUp(event);
+            EventHandler.onLCickDisplayFaceUp(event, click);
             click++;
             $('.quantity').html(`?${click}`);
         });
@@ -48,9 +48,10 @@ const App = {
         });
         $('.retry').on('click', () => {
             EventHandler.onClickRetry(arr);
+            click = 0;
         })
     },
-    compareTwoImages: (srcImg, index) => {
+    compareTwoImages: (srcImg, index, click) => {
         if (twoImages.length < 2) {
             twoImages.push({ src: srcImg, id: index });
         }
@@ -63,16 +64,24 @@ const App = {
                 $(`#${twoImages[1].id}`).css('background-image', `url(${wall})`);
             }
             twoImages = [];
-            App.completeLevel();
+            App.completeLevel(click);
         }
     },
-    completeLevel: () => {
+    completeLevel: (click) => {
         const items = $('.item');
         let result = true;
         for (let i = 0; i < items.length; i++) {
             result = result && App.isOpacity(items.eq(i));
         }
-        if (result) $('.star').html('Complete Level');
+        if (result) {
+            if(click+1 === items.length) {
+                $('.star').html('&#9734; &#9734; &#9734; Complete Level');
+            } else if (click+1 >= items.length * 3) {
+                $('.star').html('&#9734; Complete Level');
+            } else {
+                $('.star').html('&#9734; &#9734;  Complete Level');
+            }  
+        }
     },
     isOpacity: (item) => {
         return item.css('opacity') === '0.1';
@@ -105,6 +114,7 @@ const UI = {
         const $right = $('<div>').addClass('right');
         const $center = $('<div>').addClass('center');
         const $stars = $('<p>').addClass('star');
+
         $div.append($left, $center, $right);
         $left.append($('<button>')
             .html('home')
@@ -163,65 +173,60 @@ const EventHandler = {
     onClickGoToNextLevel: (nextLevel) => {
         if ($('.star').html()) nextLevel();
     },
-    onLCickDisplayFaceUp: (event) => {
+    onLCickDisplayFaceUp: (event, click) => {
         const $target = $(event.currentTarget);
         let index = $target.attr('id');
         let h2 = $('h2').html();
         let srcImg = '';
-        if (h2 === 'Level 1') {
-            srcImg = level1.arr[index];
-        } else if (h2 === 'Level 2') {
-            srcImg = level2.arr[index];
-        } else if (h2 === 'Level 3') {
-            srcImg = level3.arr[index];
-        } else if (h2 === 'Level 4') {
-            srcImg = level4.arr[index];
-        } else if (h2 === 'Level 5') {
-            srcImg = level5.arr[index];
-        } else if (h2 === 'Level 6') {
-            srcImg = level6.arr[index];
-        } else {
-            srcImg = level7.arr[index];
+        
+        for(let i =0; i < houseLevelArr.length; i++) {
+            if(h2 === houseLevelArr[i].name) {
+                srcImg = houseLevelArr[i].arr[index];
+                break;
+            }
         }
         $target.css('background-image', `url(${srcImg})`);
-        App.compareTwoImages(srcImg, index);
+        App.compareTwoImages(srcImg, index, click);
     },
     onClickRetry: (arr) => {
         if ($('.star').html()) {
             EventHandler.onClickSeeImagesAgain(arr);
             $('.star').html('');
+            $('.quantity').html('?');
         }
     }
 }
 ///////////////////////
 class Level {
-    constructor(arr, level) {
+    constructor(name, arr, level) {
+        this.name= name,
         this.arr = arr,
-            this.level = level
+        this.level = level
     }
 }
-let level1 = new Level(App.createArr(house, 4), () => {
+let level1 = new Level('Level 1', App.createArr(house, 4), () => {
     App.createLevel('Level 1', 2, 2, 0, 0, App.createArr(house, 4), level2.level);
 });
-let level2 = new Level(App.createArr(house, 6), () => {
+let level2 = new Level('Level 2' ,App.createArr(house, 6), () => {
     App.createLevel('Level 2', 2, 3, 0, 0, App.createArr(house, 6), level3.level)
 });
-let level3 = new Level(App.createArr(house, 8), () => {
+let level3 = new Level('Level 3' ,App.createArr(house, 8), () => {
     App.createLevel('Level 3', 2, 3, 1, 2, App.createArr(house, 8), level4.level)
 });
-let level4 = new Level(App.createArr(house, 10), () => {
+let level4 = new Level('Level 4', App.createArr(house, 10), () => {
     App.createLevel('Level 4', 3, 3, 1, 1, App.createArr(house, 10), level5.level)
 });
-let level5 = new Level(App.createArr(house, 12), () => {
+let level5 = new Level('Level 5', App.createArr(house, 12), () => {
     App.createLevel('Level 5', 3, 4, 0, 0, App.createArr(house, 12), level6.level)
 });
-let level6 = new Level(App.createArr(house, 14), () => {
+let level6 = new Level('Level 6', App.createArr(house, 14), () => {
     App.createLevel('Level 6', 3, 4, 1, 2, App.createArr(house, 14), level7.level)
 });
-let level7 = new Level(App.createArr(house, 16), () => {
+let level7 = new Level('Level 7', App.createArr(house, 16), () => {
     App.createLevel('Level 7', 4, 4, 0, 0, App.createArr(house, 16), EventHandler.onClickBackToMenu)
 })
 
+const houseLevelArr = [level1, level2, level3, level4, level5, level6, level7];
 ////////////////////////
 $(() => {
     UI.createMenu();
