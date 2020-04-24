@@ -58,8 +58,22 @@ const App = {
                 $(`#${twoImages[1].id}`).css('background-image', `url(${wall})`);
             }
             twoImages = [];
+            App.completeLevel();
         }
+    },
+    completeLevel: () => {
+        const items = $('.item');
+        let result = true;
+        for(let i = 0; i < items.length; i++) {
+            result = result && App.isOpacity(items.eq(i));
+        }
+        if(result) $('.star').html('Complete Level');
+
+    },
+    isOpacity: (item) => {
+        return item.css('opacity') === '0.1';
     }
+
 }
 //////////////UI
 const UI = {
