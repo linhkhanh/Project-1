@@ -1,5 +1,5 @@
 /// variable
-const menu = ['house', 'animal', 'plant', 'people', 'machine', 'transport', 'clothes', 'landcape', 'cartoon'];
+const menu = ['house', 'animal', 'plant', 'people', 'machine', 'transport', 'cartoon characters', 'mix', 'timer'];
 const wall = 'https://image.shutterstock.com/image-vector/cartoon-white-brick-wall-texture-260nw-1379193254.jpg';
 const house = ['https://i.pinimg.com/originals/34/30/2d/34302d7a184289404e2dff1f55ade1a5.jpg',
     'https://cdn2.vectorstock.com/i/1000x1000/83/06/funny-house-cartoon-vector-618306.jpg',
@@ -33,8 +33,8 @@ const App = {
         UI.turnOverImg();
 
         $('.item').on('click', () => {
-            EventHandler.onLCickDisplayFaceUp(event, click);
             click++;
+            EventHandler.onLCickDisplayFaceUp(event, click);
             $('.quantity').html(`?${click}`);
         });
         $('.again').on('click', () => {
@@ -74,9 +74,9 @@ const App = {
             result = result && App.isOpacity(items.eq(i));
         }
         if (result) {
-            if(click+1 === items.length) {
+            if(click === items.length) {
                 $('.star').html('&#9734; &#9734; &#9734; Complete Level');
-            } else if (click+1 >= items.length * 3) {
+            } else if (click >= items.length * 3) {
                 $('.star').html('&#9734; Complete Level');
             } else {
                 $('.star').html('&#9734; &#9734;  Complete Level');
@@ -215,7 +215,7 @@ let level3 = new Level('Level 3' ,App.createArr(house, 8), () => {
 });
 let level4 = new Level('Level 4', App.createArr(house, 10), () => {
     App.createLevel('Level 4', 3, 3, 1, 1, App.createArr(house, 10), level5.level)
-});
+}); 
 let level5 = new Level('Level 5', App.createArr(house, 12), () => {
     App.createLevel('Level 5', 3, 4, 0, 0, App.createArr(house, 12), level6.level)
 });
@@ -227,6 +227,7 @@ let level7 = new Level('Level 7', App.createArr(house, 16), () => {
 })
 
 const houseLevelArr = [level1, level2, level3, level4, level5, level6, level7];
+
 ////////////////////////
 $(() => {
     UI.createMenu();
