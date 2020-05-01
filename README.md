@@ -1,7 +1,6 @@
 # The memory game scope
 
 ## Table of Content
-- Project Demo
 - Introduction
 - Sources to use
 - Technology utilized
