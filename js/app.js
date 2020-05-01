@@ -56,6 +56,11 @@ const game = {
             })
             $('.statis').on('click', game.Eventhandler.onClickStatis);
             $('span').on('click', timerGame.Eventhandler.onClickHide);
+        },
+        displayStatis: () => {
+            const $title = $('<div>').addClass('lister-row');
+            $title.append($('<p>').html('Player'), $('<p>').html('Score'));
+            $('.lister-box').append($title);
         }
     },
     Eventhandler: {
@@ -69,13 +74,19 @@ const game = {
             }
         },
         onClickStatis: () => {
-            timerGame.App.sortScore();
-            $('.lister-box').empty();
-            for (let item of timerGame.players) {
-                for (let key in item) {
-                    const $div = $('<div>').addClass('lister-row');
-                    $div.append($('<p>').html(`${key}: `), $('<p>').html(item[key]));
-                    $('.lister-box').append($div);
+            if (!timerGame.players) {
+                game.UI.displayStatis();
+            } else {
+                timerGame.App.sortScore();
+                $('.lister-box').empty();
+
+                game.UI.displayStatis();
+                for (let item of timerGame.players) {
+                    for (let key in item) {
+                        const $div = $('<div>').addClass('lister-row');
+                        $div.append($('<p>').html(`${key}: `), $('<p>').html(item[key]));
+                        $('.lister-box').append($div);
+                    }
                 }
             }
             $('.modal').show();
@@ -85,7 +96,7 @@ const game = {
             if ($('.sound').html() === '🔈') {
                 $('.sound').html('&#128263;');
                 $('audio#pop')[0].pause();
-            } else if ($('.sound').html() === '🔇'){
+            } else if ($('.sound').html() === '🔇') {
                 $('.sound').html('&#128264;');
                 $('audio#pop')[0].play();
             }
@@ -198,7 +209,7 @@ const basicGame = {
     UI: {
         list: () => {
             $('.total').remove();
-            
+
             basicGame.UI.createListLevel();
             basicGame.App.setNameOfLevel();
             $('.home').on('click', basicGame.Eventhandler.onClickHome);
@@ -403,7 +414,7 @@ const timerGame = {
                     }, '600')
                 }
             }
-            intervalTimer = timerGame.App.completeLevel(nextLevel);
+            timerGame.App.completeLevel(nextLevel);
         },
         completeLevel: (nextLevel) => {
             if (basicGame.App.meetCompleteLevelCondition()) {
