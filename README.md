@@ -8,7 +8,6 @@
 - Difficulties
 - User Stories and Wireframes
 - Extra Implementation
-- Project Demo
 <!-- https://alvislim.github.io/Covid19-Interactive-dashboard/ -->
 
 ## Introduction
@@ -19,7 +18,7 @@ Memory game is a fun game, it's called that because the main skill in the game i
   - The last one is two players mode, you can play with another person.
 ​
 ## Sources to use - API (Need to discuss with lecturer how to extract sound data.) 
-    [link to API web!](https://picsum.photos/ ) - to extract image data for game.
+    https://picsum.photos/ - to extract image data for game.
 ​
 ## Technology utilized
   1. Jquery to manipulate DOM element and append the information retrieved from APIs
