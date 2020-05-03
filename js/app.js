@@ -337,6 +337,7 @@ const basicGame = {
             $('body').removeAttr('style');
             $('.list-container').remove();
             $('.container').remove();
+            twoPlayers.currentPlayer = 'Player 1';
             game.UI.createHomePage();
         },
         onClickDisplayImg: (event, arr, click, nextLevel) => {
