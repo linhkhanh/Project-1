@@ -32,12 +32,24 @@ I encountered an issue while trying to make the images render faster when level 
 
 # User Stories and Wireframes
 ## WireFrame
+  - Main page
 ![Image of main page](img/pic1.png)
+
+- List of levels of basic mode
 ![Image of list of levels of basic mode](img/pic2.png)
+
+- Basic mode page
 ![Image of basic mode page](img/pic3.png)
+
+- Timer mode page
 ![Image of timer mode page](img/pic4.png)
+
+- 2 players mode page
 ![Image of 2 players mode page](img/pic5.png)
-![Image of  lister-box page](img/pic6.png)
+
+- lister-box page
+![Image of lister-box page](img/pic6.png)
+
 
 ## UserStory 1
 As a user, I would like to see the list of all levels in the basic mode of this game, which level is activated.
@@ -52,4 +64,4 @@ As a user, I would like to have a list of all players, their scores and who has 
 As a user, I would like to see how the timer runs in each level.
 
 ## Extra Implementation
-I want to create a input box, to get the feedback of players for this game.
+Now this game can be displayed well in desktop, but in mobile or tablet I still have not made responsive design. Therefore, I want to make a mobile version of this game.
