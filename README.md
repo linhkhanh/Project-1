@@ -44,10 +44,10 @@ I encountered an issue while trying to make the images render faster when level 
   ### Timer mode page
 ![Image of timer mode page](img/pic4.png)
 
-  ### players mode page
+  ### 2 players mode page
 ![Image of 2 players mode page](img/pic5.png)
 
-  ### lister-box page
+  ### Statistical page
 ![Image of lister-box page](img/pic6.png)
 
 
