@@ -11,17 +11,17 @@
 
 ## Introduction
 ​
-Memory game is a fun game, it's called that because the main skill in the game is your memory - how well you can remember the position of items. In this game, there 3 modes: 
+Memory game is a fun game, it's called that because the main skill in the game is your memory - how well you can remember the position of items. In this game, there are 3 modes: 
   - The first one is a basic mode, in which you can play freely step by step. 
   - The sencond one is more a little bit difficult, you have to complete each level in a certain time. 
   - The last one is two players mode, you can play with another person.
 ​
-## Sources to use - API (Need to discuss with lecturer how to extract sound data.) 
-    https://picsum.photos/ - to extract image data for game.
+## Sources to use - API 
+    <https://picsum.photos/> - to extract image data for game.
 ​
 ## Technology utilized
-  1. Jquery to manipulate DOM element and append the information retrieved from APIs
-  2. Ajax call to fetch data from open source APIs
+  1. Jquery to manipulate DOM element and append the images retrieved from API
+  2. Ajax call to fetch data from open source API
   3. Javascript for the logic of matching images, calculate score of players, timer of each level
   4. LocalStorage to save the situation of levels, scores and names of players
   5. Flexbox to make the game responsive
@@ -32,22 +32,22 @@ I encountered an issue while trying to make the images render faster when level 
 
 # User Stories and Wireframes
 ## WireFrame
-  - Main page
+  ### Main page
 ![Image of main page](img/pic1.png)
 
-- List of levels of basic mode
+  ### List of levels of basic mode
 ![Image of list of levels of basic mode](img/pic2.png)
 
-- Basic mode page
+  ### Basic mode page
 ![Image of basic mode page](img/pic3.png)
 
-- Timer mode page
+  ### Timer mode page
 ![Image of timer mode page](img/pic4.png)
 
-- 2 players mode page
+  ### players mode page
 ![Image of 2 players mode page](img/pic5.png)
 
-- lister-box page
+  ### lister-box page
 ![Image of lister-box page](img/pic6.png)
 
 
