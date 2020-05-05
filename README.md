@@ -24,7 +24,7 @@ Memory game is a fun game, it's called that because the main skill in the game i
   2. Ajax call to fetch data from open source API
   3. Javascript for the logic of matching images, calculate score of players, timer of each level
   4. LocalStorage to save the situation of levels, scores and names of players
-  5. Flexbox to make the game responsive
+  5. Jquery UI to create effects when players choose correct images, increase score
   6. HTML and CSS
 
 ## Difficulties
@@ -64,4 +64,4 @@ As a user, I would like to have a list of all players, their scores and who has 
 As a user, I would like to see how the timer runs in each level.
 
 ## Extra Implementation
-Now this game can be displayed well in desktop, but in mobile or tablet I still have not made responsive design. Therefore, I want to make a mobile version of this game.
+Now this game can be displayed well on desktop, but on mobile or tablet I still have not made responsive design. Therefore, I want to make a mobile version of this game.
