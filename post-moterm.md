@@ -1,7 +1,7 @@
 # Project Post Mortem
 ## Approach and Process
 ### What in my process and approach to this project would I do differently next time?
-In next projects, if I have a chance to build a game in which there are many levels, I will create all levels automaticly, instead of hard code each levels.
+In next projects, if I have a chance to build a game in which there are many levels, I will create all levels automaticly, instead of hard code each level.
 
 ### What in my process and approach to this project went well that I would repeat next time?
 Next time, I would complete all main functions, main details of project before desining, and adding effects.
@@ -10,6 +10,7 @@ Next time, I would complete all main functions, main details of project before d
 ### What in my code and program design in the project would I do differently next time?
 In the code, there are some code blocks I wrote unreadeable, there is loop in loop, and some functions are not dependent, they effect each other. When I fix one of them, I need to fix the other ones.
 ex: 
+```
 activateNextLevel: () => {
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
@@ -23,7 +24,7 @@ activateNextLevel: () => {
                 }
             }
         }
-
+```
 ### What in my code and program design in the project went well? Is there anything I would do the same next time?
 In my code, I divided them into many objects, each object is a mode of my game.
 In side each object, I divided all functions into 3 kinds of function: 
