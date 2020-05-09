@@ -4,7 +4,11 @@
 In next projects, if I have a chance to build a game in which there are many levels, I will create all levels automaticly, instead of hard code each level.
 
 ### What in my process and approach to this project went well that I would repeat next time?
+<<<<<<< HEAD
  Next time, I would complete all main functions, main details of project before desining, and adding effects.
+=======
+ Next time, I would complete all main functions, main details of project before designing, and adding effects.
+>>>>>>> origin/master
 
 ## Code and Code Design
 ### What in my code and program design in the project would I do differently next time?
@@ -40,4 +44,3 @@ I usually use console.log() to check if a function works correctly or not.
 I would commit frequently, or whenever I complete a function and the code works well, I would commit immediately.
 ### How is the overall level of the course during this unit? (instruction, course materials, etc.)
 I think this unit is difficult but I am still able to follow.
-
