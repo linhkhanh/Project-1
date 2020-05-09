@@ -4,7 +4,7 @@
 In next projects, if I have a chance to build a game in which there are many levels, I will create all levels automaticly, instead of hard code each level.
 
 ### What in my process and approach to this project went well that I would repeat next time?
- Next time, I would complete all main functions, main details of project before desining, and adding effects.
+ Next time, I would complete all main functions, main details of project before designing, and adding effects.
 
 ## Code and Code Design
 ### What in my code and program design in the project would I do differently next time?
